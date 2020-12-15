@@ -27,7 +27,7 @@ ROADMAP:
 ## Instruções
 ### Para executar os arquivos:
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
-1. Acesse a pasta G2
+1. Acesse a pasta do trabalho em questão
 3. Acesse o arquivo nome_do_arquivo.sql
 3. Opções:
     3. Copie o conteúdo do arquivo -> cole em SQL Worksheet
