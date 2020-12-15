@@ -30,9 +30,9 @@ ROADMAP:
 1. Acesse a pasta do trabalho em questão
 5. Acesse o arquivo nome_do_arquivo.sql
 6. Opções:
-    3. Copie o conteúdo do arquivo -> cole em SQL Worksheet
-    3. Em My Scripts -> Upload Script -> Coloque o arquivo (CUIDADO: dependendo do estao de script.sql pode ser que existam erros, em caso positivo, tente a outra anterior)
-    3. Vc pode salvar esta sessão para não precisar fazer isso toda vez que queira reiniciar o sistema
+   - Copie o conteúdo do arquivo -> cole em SQL Worksheet
+   - Em My Scripts -> Upload Script -> Coloque o arquivo (CUIDADO: dependendo do estao de script.sql pode ser que existam erros, em caso positivo, tente a outra anterior)
+   - Vc pode salvar esta sessão para não precisar fazer isso toda vez que queira reiniciar o sistema
 4. Comece uma nova sessão em [sql.oracle.com](sql.oracle.com/) 
     4. My Session -> Reset Session (assinale todas opões possíveis)
 5. Execute consultas em SQL Worksheet (adicione comentários sempre que possível)
