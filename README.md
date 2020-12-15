@@ -28,8 +28,8 @@ ROADMAP:
 ### Para executar os arquivos:
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
 1. Acesse a pasta do trabalho em questão
-3. Acesse o arquivo nome_do_arquivo.sql
-3. Opções:
+5. Acesse o arquivo nome_do_arquivo.sql
+6. Opções:
     3. Copie o conteúdo do arquivo -> cole em SQL Worksheet
     3. Em My Scripts -> Upload Script -> Coloque o arquivo (CUIDADO: dependendo do estao de script.sql pode ser que existam erros, em caso positivo, tente a outra anterior)
     3. Vc pode salvar esta sessão para não precisar fazer isso toda vez que queira reiniciar o sistema
