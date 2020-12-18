@@ -133,12 +133,6 @@ VALUES (09, 'MRE3414')
 INSERT INTO possui 
 VALUES (09, 'MMS1744')
 ;
-INSERT INTO possui 
-VALUES (10, 'NAU9527')
-;
-INSERT INTO possui 
-VALUES (10, 'MEB2511')
-;
 CALL InsereAmizade(01, 02)
 ;
 CALL InsereAmizade(01, 03)
@@ -151,8 +145,6 @@ CALL InsereAmizade(01, 07)
 ;
 CALL InsereAmizade(01, 08)
 ;
-CALL InsereAmizade(01, 10)
-;
 CALL InsereAmizade(02, 05)
 ;
 CALL InsereAmizade(02, 09)
@@ -163,15 +155,5 @@ CALL InsereAmizade(03, 07)
 ;
 CALL InsereAmizade(04, 05)
 ;
-CALL InsereAmizade(04, 10)
-;
 CALL InsereAmizade(06, 07)
-;
-CALL InsereAmizade(06, 09)
-;
-CALL InsereAmizade(06, 10)
-;
-CALL InsereAmizade(08, 09)
-;
-CALL InsereAmizade(08, 10)
 ;

@@ -1,3 +1,4 @@
+-- Insere a amizade para as duas pessoas
 CREATE OR REPLACE PROCEDURE insere_amizade
     (codigo_pessoa INTEGER, 
      codigo_amiga INTEGER, 
@@ -11,12 +12,12 @@ AS $$
     values (codigo_amiga, codigo_pessoa, data_amizade);
 $$;
 
+-- Remove os carros, se possivel, e posse de uma pessoa
 CREATE OR REPLACE FUNCTION remove_dependencia_pessoa() RETURNS TRIGGER
 LANGUAGE PLPGSQL 
 AS $$
 DECLARE 
 	placaCarro VARCHAR(8);
-	n INTEGER;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM temAmizade 
                WHERE codigo_pessoa = OLD.codigo OR
@@ -43,3 +44,17 @@ CREATE TRIGGER t_aft_delete_row_pessoa
 	ON pessoa
 	FOR EACH ROW
 	EXECUTE PROCEDURE remove_dependencia_pessoa();
+
+-- ===== ETAPA 4 ===== 
+
+-- REQUISITO 1: sequencia para o codigo de uma pessoa 
+CREATE OR REPLACE FUNCTION gera_codigo_pessoa() RETURNS INTEGER 
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+	novo_codigo INTEGER;
+BEGIN
+	SELECT MAX(codigo)+1 INTO novo_codigo FROM pessoa;
+
+   RETURN novo_codigo;
+END; $$;

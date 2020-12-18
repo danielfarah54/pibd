@@ -2,7 +2,7 @@
 Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados (2020)
 
 ## Trabalho 2
-ROADMAP:
+### Requisitos:
 1. Crie uma sequência para o código da pessoa.
 2. Altere a tabela da pessoa adicionando um atributo que conta o número de carros da pessoa, e adicionando um atributo que conta o número de amigos da pessoa. Ambos os atributos devem ser inteiros.
 3. Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.
@@ -18,7 +18,7 @@ ROADMAP:
 13. Faça uma view que retorne todas os nomes das pessoas que não tem amigos.
 14. Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
 
-### Requisitos
+### Obrigatório utilizar:
 1. Em pelo menos uma procedure/function utilizar um cursor implícito.
 2. Em pelo menos uma procedure/function utilizar um cursor explícito.
 3. Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado.
