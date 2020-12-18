@@ -28,6 +28,7 @@ ROADMAP:
 ### Para executar os arquivos:
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
 1. Execute em sequência:
-   1. create.sql
-   2. popula.sql
-   3. requisitos.sql
+   1. 1create.sql
+   2. 2triggerANDprocedure.sql
+   3. 3popula.sql
+   4. 4requisitos.sql
