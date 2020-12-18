@@ -9,7 +9,7 @@ rem Tenta deletar a pessoa com código igual a 111.
 delete from pessoa where codigo = 111;
 /
 rem Remove as amizades das pessoas com código igual a 111.
-delete from temAmizade where codigoPessoa = 111 or codigoAmiga = 111;
+delete from temAmizade where codigo_pessoa = 111 or codigo_amiga = 111;
 /
 rem Restrição 3: faça que ao apagar uma pessoa no banco, todos os relacionamentos com os seus carros e seus carros sejam apagados.
 rem Observe a tabela de posse sobre um carro:
