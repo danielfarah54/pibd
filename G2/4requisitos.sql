@@ -37,3 +37,8 @@ select * from carro
 
 -- Requisito 1
 -- Gera o codigo automaticamente
+
+-- Requisito 2
+-- Adicionado em 1create.sql e 2triggerANDprocedures.sql
+SELECT codigo, pnome, num_amigos, num_carros
+FROM pessoa;

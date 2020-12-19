@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS possui CASCADE;
 DROP TABLE IF EXISTS carro CASCADE;
 DROP TABLE IF EXISTS pessoa CASCADE;
 
--- Restrição 3 no atributo 'cor'
+-- Restrição 3 (ETAPA3) no atributo 'cor'
 CREATE TABLE carro (   
     placa   VARCHAR(8),   
     ano     INTEGER NOT NULL,   
@@ -25,7 +25,7 @@ CREATE TABLE pessoa (
     rua             VARCHAR(50), 
     CONSTRAINT pk_pessoa PRIMARY KEY (codigo)
 );
--- ON DELETE CASCADE CODIGO
+
 CREATE TABLE possui ( 
     codigo  INTEGER, 
     placa   VARCHAR(10), 
@@ -47,7 +47,7 @@ CREATE TABLE telefone (
         ON DELETE CASCADE
 );
 
--- Restrição 3 no atributo 'data'
+-- Restrição 3 (ETAPA3) no atributo 'data'
 CREATE TABLE temAmizade ( 
     codigo_pessoa    INTEGER, 
     codigo_amiga     INTEGER, 
@@ -58,3 +58,8 @@ CREATE TABLE temAmizade (
     CONSTRAINT fk_tem_amizade_codigo_amiga FOREIGN KEY (codigo_amiga) 
         REFERENCES pessoa (codigo) 
 );
+
+-- REQUISITO 2
+ALTER TABLE pessoa
+ADD COLUMN num_amigos INTEGER DEFAULT 0,
+ADD COLUMN num_carros INTEGER DEFAULT 0;

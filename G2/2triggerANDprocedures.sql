@@ -37,9 +37,9 @@ BEGIN
 END;
 $$;
 
-DROP TRIGGER IF EXISTS t_aft_delete_row_pessoa
+DROP TRIGGER IF EXISTS t_bef_delete_row_pessoa
 	ON pessoa;
-CREATE TRIGGER t_aft_delete_row_pessoa
+CREATE TRIGGER t_bef_delete_row_pessoa
 	BEFORE DELETE
 	ON pessoa
 	FOR EACH ROW
@@ -58,3 +58,110 @@ BEGIN
 
    RETURN novo_codigo;
 END; $$;
+
+-- REQUISITO 2: conta o numero de amigos e carros
+-- trigger para quando insere em carros
+CREATE OR REPLACE FUNCTION conta_carros_insert() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_carros INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_carros
+    FROM pessoa p, possui po
+    WHERE p.codigo = NEW.codigo AND
+          po.codigo = NEW.codigo; 
+
+    UPDATE pessoa
+    SET  num_carros = n_carros
+    WHERE codigo = NEW.codigo;
+    RETURN NEW;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_inst_row_possui
+	ON possui;
+CREATE TRIGGER t_aft_inst_row_possui
+	AFTER INSERT
+	ON possui
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_carros_insert();
+
+-- -- trigger para quando remove em carros
+CREATE OR REPLACE FUNCTION conta_carros_delete() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_carros INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_carros
+    FROM pessoa p, possui po
+    WHERE p.codigo = OLD.codigo AND
+          po.codigo = OLD.codigo; 
+
+    UPDATE pessoa
+    SET  num_carros = n_carros
+    WHERE codigo = OLD.codigo;
+    RETURN OLD;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_del_row_possui
+	ON possui;
+CREATE TRIGGER t_aft_del_row_possui
+	AFTER DELETE
+	ON possui
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_carros_delete();
+
+-- trigger para quando insere em temAmizade
+CREATE OR REPLACE FUNCTION conta_amigos_insert() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_amigos INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_amigos
+    FROM pessoa p, temAmizade ta
+    WHERE p.codigo = NEW.codigo_pessoa AND
+          ta.codigo_pessoa = NEW.codigo_pessoa; 
+
+    UPDATE pessoa
+    SET  num_amigos = n_amigos
+    WHERE codigo = NEW.codigo_pessoa;
+
+    RETURN NEW;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_inst_row_temAmizade
+	ON temAmizade;
+CREATE TRIGGER t_aft_inst_row_temAmizade
+	AFTER INSERT
+	ON temAmizade
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_amigos_insert();
+
+-- -- trigger para quando remove em temAmizade
+CREATE OR REPLACE FUNCTION conta_amigos_delete() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_amigos INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_amigos
+    FROM pessoa p, temAmizade ta
+    WHERE p.codigo = OLD.codigo_pessoa AND
+          ta.codigo_pessoa = OLD.codigo_pessoa; 
+
+    UPDATE pessoa
+    SET  num_amigos = n_amigos
+    WHERE codigo = OLD.codigo_pessoa;
+    RETURN OLD;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_del_row_temAmizade
+	ON temAmizade;
+CREATE TRIGGER t_aft_del_row_temAmizade
+	AFTER DELETE
+	ON temAmizade
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_amigos_delete();
+
