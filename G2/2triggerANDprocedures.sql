@@ -71,7 +71,10 @@ DECLARE
 	novo_codigo INTEGER;
 BEGIN
 	SELECT MAX(codigo)+1 INTO novo_codigo FROM pessoa;
-
+    IF novo_codigo IS NULL
+    THEN 
+        novo_codigo = 0;
+    END IF;
    RETURN novo_codigo;
 END; $$;
 
