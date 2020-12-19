@@ -89,3 +89,8 @@ SELECT * FROM telefone WHERE codigo = 11;
 SELECT * FROM possui WHERE codigo = 11;
 CALL insere_possui (11, 'ccc3333');
 SELECT * FROM possui WHERE codigo = 11;
+
+-- REQUISITO 5
+SELECT * FROM pessoa ORDER BY codigo DESC;
+INSERT INTO pessoa(pNome, sobrenome, data_nascimento, email, homepage, cep, numEndereco, rua) VALUES ('teste', 'de', '01-01-2020', 'triger', 'sem', 'codigo', 111, 'parametro');
+SELECT * FROM pessoa ORDER BY codigo DESC;
