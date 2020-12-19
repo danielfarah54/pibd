@@ -377,20 +377,3 @@ BEGIN
     END IF;
 END; $$;
 
--- REQUISITO 5
--- Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
-CREATE OR REPLACE FUNCTION insere_pessoa_sem_codigo() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    SELECT gera_codigo_pessoa() INTO NEW.codigo;
-    RETURN NEW;
-END;
-$$;
-DROP TRIGGER IF EXISTS t_bef_ins_row_pessoa
-    ON pessoa;
-CREATE TRIGGER t_bef_ins_row_pessoa
-    BEFORE INSERT
-    ON pessoa
-    FOR EACH ROW
-    EXECUTE PROCEDURE insere_pessoa_sem_codigo();
