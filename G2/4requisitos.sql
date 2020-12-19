@@ -72,25 +72,3 @@ SELECT * FROM telefone WHERE codigo = 10;
 
 -- REQUISITO 7
 SELECT get_nome(10);
-
--- REQUISITO 3
-SELECT * FROM pessoa WHERE codigo = 11;
-CALL insere_pessoa(11, 'daniel', 'farah', '08-03-1991', 'daniel@teste.com', 'danielfarah.com', '13333444', 13, 'rua 34');
-SELECT * FROM pessoa WHERE codigo = 11;
-
-SELECT * FROM carro WHERE placa = 'ccc3333';
-CALL insere_carro ('ccc3333', 2014, 'preto', 'golzinho bolinha');
-SELECT * FROM carro WHERE placa = 'ccc3333';
-
-SELECT * FROM telefone WHERE codigo = 11;
-CALL insere_telefone (11, 16, 91111, 4444);
-SELECT * FROM telefone WHERE codigo = 11;
-
-SELECT * FROM possui WHERE codigo = 11;
-CALL insere_possui (11, 'ccc3333');
-SELECT * FROM possui WHERE codigo = 11;
-
--- REQUISITO 5
-SELECT * FROM pessoa ORDER BY codigo DESC;
-INSERT INTO pessoa(pNome, sobrenome, data_nascimento, email, homepage, cep, numEndereco, rua) VALUES ('teste', 'de', '01-01-2020', 'triger', 'sem', 'codigo', 111, 'parametro');
-SELECT * FROM pessoa ORDER BY codigo DESC;
