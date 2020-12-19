@@ -1,7 +1,10 @@
-# pibd
-Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados (2020)
+# Porjeto e Implementaçao de Banco de Dados
+Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados (ENPE/2020)
 
-## Trabalho 2
+## Trabalho 2 - Grupo 04
+### Participantes da Etapa 04:
+* Marco Antonio B. Grivol (758619)
+
 ### Requisitos:
 1. ~~Crie uma sequência para o código da pessoa.~~
 2. ~~Altere a tabela da pessoa adicionando um atributo que conta o número de carros da pessoa, e adicionando um atributo que conta o número de amigos da pessoa. Ambos os atributos devem ser inteiros.~~
