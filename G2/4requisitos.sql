@@ -37,8 +37,8 @@ select * from carro;
 
 -- Requisito 1
 -- Gera o codigo automaticamente
-INSERT INTO pessoa
-VALUES (SELECT gera_codigo_pessoa(), 'Thor', 'Odinson', '10-JAN-0965', 'mijolnir@asgard.com', NULL, '00001-254', '513', 'Asgard'
+SELECT MAX(codigo) FROM pessoa;
+SELECT gera_codigo_pessoa();
 
 -- Requisito 2, 9, 11, 12
 -- Adicionado em 1create.sql e 2triggerANDprocedures.sql
@@ -46,9 +46,13 @@ VALUES (SELECT gera_codigo_pessoa(), 'Thor', 'Odinson', '10-JAN-0965', 'mijolnir
 SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
 
-DELETE FROM temAmizade WHERE codigo_pessoa = 1 OR codigo_amiga = 1;
-DELETE FROM possui WHERE codigo = 1;
-DELETE FROM pessoa WHERE codigo = 1;
+DELETE FROM temAmizade WHERE codigo_pessoa = 2 OR codigo_amiga = 2;
+DELETE FROM possui WHERE codigo = 2;
+
+SELECT codigo, pnome, num_amigos, num_carros
+FROM pessoa;
+
+DELETE FROM pessoa WHERE codigo = 2;
 
 SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
