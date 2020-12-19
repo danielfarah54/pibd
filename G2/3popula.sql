@@ -31,11 +31,11 @@ VALUES (222, '2222222')
 INSERT INTO possui
 VALUES (333, '3333333')
 ;
-CALL InsereAmizade(111, 222)
+CALL insere_amizade(111, 222)
 ;
-CALL InsereAmizade(111, 333)
+CALL insere_amizade(111, 333)
 ;
-CALL InsereAmizade(111, 444)
+CALL insere_amizade(111, 444)
 ;
 INSERT INTO pessoa 
 VALUES (01, 'Francisca', 'Adriana Malu Corte Real', '26-OCT-1991', 'ffranciscaadrianamalucortereal@charquesorocaba.com.br', 'francisca_homepage', '17340-970', 157, 'Rua Passeio das Primaveras')
@@ -133,27 +133,27 @@ VALUES (09, 'MRE3414')
 INSERT INTO possui 
 VALUES (09, 'MMS1744')
 ;
-CALL InsereAmizade(01, 02)
+CALL insere_amizade(01, 02)
 ;
-CALL InsereAmizade(01, 03)
+CALL insere_amizade(01, 03)
 ;
-CALL InsereAmizade(01, 04)
+CALL insere_amizade(01, 04)
 ;
-CALL InsereAmizade(01, 05)
+CALL insere_amizade(01, 05)
 ;
-CALL InsereAmizade(01, 07)
+CALL insere_amizade(01, 07)
 ;
-CALL InsereAmizade(01, 08)
+CALL insere_amizade(01, 08)
 ;
-CALL InsereAmizade(02, 05)
+CALL insere_amizade(02, 05)
 ;
-CALL InsereAmizade(02, 09)
+CALL insere_amizade(02, 09)
 ;
-CALL InsereAmizade(03, 05)
+CALL insere_amizade(03, 05)
 ;
-CALL InsereAmizade(03, 07)
+CALL insere_amizade(03, 07)
 ;
-CALL InsereAmizade(04, 05)
+CALL insere_amizade(04, 05)
 ;
-CALL InsereAmizade(06, 07)
+CALL insere_amizade(06, 07)
 ;

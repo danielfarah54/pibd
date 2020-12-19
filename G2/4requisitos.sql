@@ -37,9 +37,19 @@ select * from carro;
 
 -- Requisito 1
 -- Gera o codigo automaticamente
+INSERT INTO pessoa
+VALUES (SELECT gera_codigo_pessoa(), 'Thor', 'Odinson', '10-JAN-0965', 'mijolnir@asgard.com', NULL, '00001-254', '513', 'Asgard'
 
--- Requisito 2
+-- Requisito 2, 9, 11, 12
 -- Adicionado em 1create.sql e 2triggerANDprocedures.sql
+-- Observe o numero de amigos e carros antes e depois da remocao
+SELECT codigo, pnome, num_amigos, num_carros
+FROM pessoa;
+
+DELETE FROM temAmizade WHERE codigo_pessoa = 1 OR codigo_amiga = 1;
+DELETE FROM possui WHERE codigo = 1;
+DELETE FROM pessoa WHERE codigo = 1;
+
 SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
 
@@ -56,3 +66,5 @@ SELECT * FROM telefone WHERE codigo = 10;
 CALL altera_telefone(10, 16, 9, 38264321);
 SELECT * FROM telefone WHERE codigo = 10;
 
+-- REQUISITO 7
+SELECT get_nome(10);

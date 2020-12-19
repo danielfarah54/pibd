@@ -55,6 +55,11 @@ CREATE TRIGGER t_aft_del_row_possui
     FOR EACH ROW
     EXECUTE PROCEDURE remove_dependencia_pessoa();
 
+
+
+
+
+
 -- ===== ETAPA 4 ===== 
 
 -- REQUISITO 1: sequencia para o codigo de uma pessoa 
@@ -69,7 +74,74 @@ BEGIN
    RETURN novo_codigo;
 END; $$;
 
--- REQUISITO 2: conta o numero de amigos e carros
+
+
+
+
+
+-- REQUISITO 2: implementado atraves do requisito 9 e 11
+-- REQUISITO 9: atualiza numero de amigos
+-- REQUISITO 11: atualiza o numero de amigos
+-- trigger para quando insere em temAmizade
+CREATE OR REPLACE FUNCTION conta_amigos_insert() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_amigos INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_amigos
+    FROM pessoa p, temAmizade ta
+    WHERE p.codigo = NEW.codigo_pessoa AND
+          ta.codigo_pessoa = NEW.codigo_pessoa; 
+
+    UPDATE pessoa
+    SET  num_amigos = n_amigos
+    WHERE codigo = NEW.codigo_pessoa;
+
+    RETURN NEW;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_inst_row_temAmizade_update_num
+	ON temAmizade;
+CREATE TRIGGER t_aft_inst_row_temAmizade_update_num
+	AFTER INSERT
+	ON temAmizade
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_amigos_insert();
+
+
+-- -- trigger para quando remove em temAmizade
+CREATE OR REPLACE FUNCTION conta_amigos_delete() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    n_amigos INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO n_amigos
+    FROM pessoa p, temAmizade ta
+    WHERE p.codigo = OLD.codigo_pessoa AND
+        ta.codigo_pessoa = OLD.codigo_pessoa; 
+
+    UPDATE pessoa
+    SET  num_amigos = n_amigos
+    WHERE codigo = OLD.codigo_pessoa;
+    RETURN NEW;
+END; $$;
+
+DROP TRIGGER IF EXISTS t_aft_del_row_temAmizade_update_num
+	ON temAmizade;
+CREATE TRIGGER t_aft_del_row_temAmizade_update_num
+	AFTER DELETE
+	ON temAmizade
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_amigos_delete();
+
+
+
+
+
+
+-- REQUISITO 12: atualiza o numero de carros
 -- trigger para quando insere em carros
 CREATE OR REPLACE FUNCTION conta_carros_insert() RETURNS TRIGGER
 LANGUAGE PLPGSQL
@@ -113,7 +185,6 @@ BEGIN
     WHERE codigo = OLD.codigo;
     RETURN NEW;
 END; $$;
-
 DROP TRIGGER IF EXISTS t_aft_del_row_possui_update_num
 	ON possui;
 CREATE TRIGGER t_aft_del_row_possui_update_num
@@ -122,58 +193,9 @@ CREATE TRIGGER t_aft_del_row_possui_update_num
 	FOR EACH ROW
 	EXECUTE PROCEDURE conta_carros_delete();
 
--- trigger para quando insere em temAmizade
-CREATE OR REPLACE FUNCTION conta_amigos_insert() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-DECLARE
-    n_amigos INTEGER;
-BEGIN
-    SELECT COUNT(*) INTO n_amigos
-    FROM pessoa p, temAmizade ta
-    WHERE p.codigo = NEW.codigo_pessoa AND
-          ta.codigo_pessoa = NEW.codigo_pessoa; 
 
-    UPDATE pessoa
-    SET  num_amigos = n_amigos
-    WHERE codigo = NEW.codigo_pessoa;
 
-    RETURN NEW;
-END; $$;
 
-DROP TRIGGER IF EXISTS t_aft_inst_row_temAmizade_update_num
-	ON temAmizade;
-CREATE TRIGGER t_aft_inst_row_temAmizade_update_num
-	AFTER INSERT
-	ON temAmizade
-	FOR EACH ROW
-	EXECUTE PROCEDURE conta_amigos_insert();
-
--- -- trigger para quando remove em temAmizade
-CREATE OR REPLACE FUNCTION conta_amigos_delete() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-DECLARE
-    n_amigos INTEGER;
-BEGIN
-    SELECT COUNT(*) INTO n_amigos
-    FROM pessoa p, temAmizade ta
-    WHERE p.codigo = OLD.codigo_pessoa AND
-        ta.codigo_pessoa = OLD.codigo_pessoa; 
-
-    UPDATE pessoa
-    SET  num_amigos = n_amigos
-    WHERE codigo = OLD.codigo_pessoa;
-    RETURN NEW;
-END; $$;
-
-DROP TRIGGER IF EXISTS t_aft_del_row_temAmizade_update_num
-	ON temAmizade;
-CREATE TRIGGER t_aft_del_row_temAmizade_update_num
-	AFTER DELETE
-	ON temAmizade
-	FOR EACH ROW
-	EXECUTE PROCEDURE conta_amigos_delete();
 
 -- REQUISITO 4
 -- Faça um procedimento para cada tabela de seu esquema relacional para que permita a alteração de dados.
@@ -254,6 +276,24 @@ BEGIN
     END IF;
 END; $$;
 
+
+
+
+
+
+-- REQUISITO 2
+DROP FUNCTION IF EXISTS get_nome;
+CREATE OR REPLACE FUNCTION get_nome (cod INTEGER) RETURNS TEXT
+LANGUAGE PLPGSQL
+AS $$
+DECLARE
+    s VARCHAR(101);
+BEGIN
+    SELECT CONCAT(pnome, ' ', sobrenome) INTO s
+    FROM pessoa
+    WHERE codigo = cod;
+    RETURN s;
+END; $$;
 
 
     
