@@ -31,7 +31,8 @@ CREATE TABLE possui (
     placa   VARCHAR(10), 
     CONSTRAINT pk_possui PRIMARY KEY (codigo, placa), 
     CONSTRAINT fk_possui_codigo FOREIGN KEY (codigo) 
-        REFERENCES pessoa (codigo), 
+        REFERENCES pessoa (codigo)
+        ON DELETE CASCADE,
     CONSTRAINT fk_possui_placa FOREIGN KEY (placa) 
         REFERENCES carro (placa)
 );

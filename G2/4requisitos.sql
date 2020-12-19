@@ -30,7 +30,7 @@ delete from pessoa where codigo = 444;
 select * from possui;
 
 -- Observe que o carro em questão foi removido pois ninguém o possui.
-select * from carro
+select * from carro;
 
 -- Fim das restrições da etapa 3
 -- Restricoes da etapa 4
@@ -42,3 +42,17 @@ select * from carro
 -- Adicionado em 1create.sql e 2triggerANDprocedures.sql
 SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
+
+-- Requisito 4
+SELECT * FROM pessoa WHERE codigo = 10;
+CALL altera_pessoa(10, 'Jhonny', 'Silverhand', current_date, 'cyber@punk.com', NULL, '99775-954', '2077', 'Night City');
+SELECT * FROM pessoa WHERE codigo = 10;
+
+SELECT * FROM carro WHERE placa = 'GVZ9079'; 
+CALL altera_carro('GVZ9079', 1908, 'Preto', 'Model T');
+SELECT * FROM carro WHERE placa = 'GVZ9079'; 
+
+SELECT * FROM telefone WHERE codigo = 10;
+CALL altera_telefone(10, 16, 9, 38264321);
+SELECT * FROM telefone WHERE codigo = 10;
+
