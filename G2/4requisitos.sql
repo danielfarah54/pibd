@@ -61,52 +61,7 @@ DELETE FROM pessoa WHERE codigo = 2;
 SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
 
--- Requisito 4
--- Altera dados de pessoa, carro e telefone (telefone cria um novo caso nao exista)
-SELECT * FROM pessoa WHERE codigo = 10;
-CALL altera_pessoa(10, 'Jhonny', 'Silverhand', current_date, 'cyber@punk.com', NULL, '99775-954', '2077', 'Night City');
-SELECT * FROM pessoa WHERE codigo = 10;
-
-SELECT * FROM carro WHERE placa = 'GVZ9079'; 
-CALL altera_carro('GVZ9079', 1908, 'Preto', 'Model T');
-SELECT * FROM carro WHERE placa = 'GVZ9079'; 
-
-SELECT * FROM telefone WHERE codigo = 10;
-CALL altera_telefone(10, 16, 9, 38264321);
-SELECT * FROM telefone WHERE codigo = 10;
-
--- REQUISITO 7
--- Retorna o nome de uma pessoa
-SELECT get_nome(10);
-
--- REQUISITO 8
--- Conta os amigos de uma pessoa
-SELECT codigo, num_amigos FROM pessoa;
-CALL insere_amizade(222, 333);
-SELECT conta_amigos(333);
-
--- REQUISITO 13
--- Retorna todas pessoas sem amziades :(
-SELECT * FROM v_pessoas_sem_amigos;
-
--- REQUISITO 3
-SELECT * FROM pessoa WHERE codigo = 11;
-CALL insere_pessoa(11, 'daniel', 'farah', '08-03-1991', 'daniel@teste.com', 'danielfarah.com', '13333444', 13, 'rua 34');
-SELECT * FROM pessoa WHERE codigo = 11;
-
-SELECT * FROM carro WHERE placa = 'ccc3333';
-CALL insere_carro ('ccc3333', 2014, 'preto', 'golzinho bolinha');
-SELECT * FROM carro WHERE placa = 'ccc3333';
-
-SELECT * FROM telefone WHERE codigo = 11;
-CALL insere_telefone (11, 16, 91111, 4444);
-SELECT * FROM telefone WHERE codigo = 11;
-
-SELECT * FROM possui WHERE codigo = 11;
-CALL insere_possui (11, 'ccc3333');
-SELECT * FROM possui WHERE codigo = 11;
-
--- REQUISITO 6
+-- REQUISITO 3 e 6
 CALL insere_pessoa(12, 'daniel', 'farah', '08-03-1991', 'daniel@teste.com', 'danielfarah.com', '13333444', 13, 'rua 34');
 CALL insere_pessoa(13, 'adilson', 'souza', '01-01-1991', 'adilson@teste.com', 'adilsonsouza.com', '13333444', 111, 'rua 11');
 CALL insere_pessoa(14, 'bruna', 'oliveira', '02-02-1992', 'bruna@teste.com', 'brunaoliveira.com', '13333444', 222, 'rua 22');
@@ -150,3 +105,31 @@ CALL insere_possui (18, 'ggg7777');
 CALL insere_possui (19, 'hhh8888');
 CALL insere_possui (20, 'iii9999');
 CALL insere_possui (21, 'jjj1010');
+
+-- Requisito 4
+-- Altera dados de pessoa, carro e telefone (telefone cria um novo caso nao exista)
+SELECT * FROM pessoa WHERE codigo = 10;
+CALL altera_pessoa(10, 'Jhonny', 'Silverhand', current_date, 'cyber@punk.com', NULL, '99775-954', '2077', 'Night City');
+SELECT * FROM pessoa WHERE codigo = 10;
+
+SELECT * FROM carro WHERE placa = 'GVZ9079'; 
+CALL altera_carro('GVZ9079', 1908, 'Preto', 'Model T');
+SELECT * FROM carro WHERE placa = 'GVZ9079'; 
+
+SELECT * FROM telefone WHERE codigo = 10;
+CALL altera_telefone(10, 16, 9, 38264321);
+SELECT * FROM telefone WHERE codigo = 10;
+
+-- REQUISITO 7
+-- Retorna o nome de uma pessoa
+SELECT get_nome(10);
+
+-- REQUISITO 8
+-- Conta os amigos de uma pessoa
+SELECT codigo, num_amigos FROM pessoa;
+CALL insere_amizade(222, 333);
+SELECT conta_amigos(333);
+
+-- REQUISITO 13
+-- Retorna todas pessoas sem amziades :(
+SELECT * FROM v_pessoas_sem_amigos;
