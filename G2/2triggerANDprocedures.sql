@@ -1,4 +1,3 @@
--- Parte do REQUISITO 3 (Etapa 4)
 -- Insere a amizade para as duas pessoas
 CREATE OR REPLACE PROCEDURE insere_amizade
     (codigo_pessoa INTEGER, 
@@ -71,13 +70,12 @@ DECLARE
 	novo_codigo INTEGER;
 BEGIN
 	SELECT MAX(codigo)+1 INTO novo_codigo FROM pessoa;
-
+    IF novo_codigo IS NULL
+    THEN 
+        novo_codigo = 0;
+    END IF;
    RETURN novo_codigo;
 END; $$;
-
-
-
-
 
 
 -- REQUISITO 2: implementado atraves do requisito 9 e 11
@@ -136,65 +134,6 @@ CREATE TRIGGER t_aft_del_row_temAmizade_update_num
 	ON temAmizade
 	FOR EACH ROW
 	EXECUTE PROCEDURE conta_amigos_delete();
-
-
-
-
-
-
--- REQUISITO 12: atualiza o numero de carros
--- trigger para quando insere em carros
-CREATE OR REPLACE FUNCTION conta_carros_insert() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-DECLARE
-    n_carros INTEGER;
-BEGIN
-    SELECT COUNT(*) INTO n_carros
-    FROM pessoa p, possui po
-    WHERE p.codigo = NEW.codigo AND
-          po.codigo = NEW.codigo; 
-
-    UPDATE pessoa
-    SET  num_carros = n_carros
-    WHERE codigo = NEW.codigo;
-    RETURN NEW;
-END; $$;
-
-DROP TRIGGER IF EXISTS t_aft_inst_row_possui_update_num
-	ON possui;
-CREATE TRIGGER t_aft_inst_row_possui_update_num
-	AFTER INSERT
-	ON possui
-	FOR EACH ROW
-	EXECUTE PROCEDURE conta_carros_insert();
-
--- -- trigger para quando remove em carros
-CREATE OR REPLACE FUNCTION conta_carros_delete() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-DECLARE
-    n_carros INTEGER;
-BEGIN
-    SELECT COUNT(*) INTO n_carros
-    FROM pessoa p, possui po
-    WHERE p.codigo = OLD.codigo AND
-        po.codigo = OLD.codigo; 
-
-    UPDATE pessoa
-    SET  num_carros = n_carros
-    WHERE codigo = OLD.codigo;
-    RETURN NEW;
-END; $$;
-DROP TRIGGER IF EXISTS t_aft_del_row_possui_update_num
-	ON possui;
-CREATE TRIGGER t_aft_del_row_possui_update_num
-	AFTER DELETE
-	ON possui
-	FOR EACH ROW
-	EXECUTE PROCEDURE conta_carros_delete();
-
-
 
 
 
@@ -280,9 +219,7 @@ END; $$;
 
 
 
-
-
--- REQUISITO 2
+-- REQUISITO 7
 DROP FUNCTION IF EXISTS get_nome;
 CREATE OR REPLACE FUNCTION get_nome (cod INTEGER) RETURNS TEXT
 LANGUAGE PLPGSQL
@@ -296,84 +233,83 @@ BEGIN
     RETURN s;
 END; $$;
 
--- REQUISITO 3
--- Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.
-DROP PROCEDURE IF EXISTS insere_pessoa;
-CREATE OR REPLACE PROCEDURE insere_pessoa
-    (p_cod             INTEGER, 
-     p_nome            VARCHAR(50), 
-     p_sobrenome       VARCHAR(50), 
-     p_data_nascimento date, 
-     p_email           VARCHAR(64), 
-     p_homepage        VARCHAR(64), 
-     p_cep             VARCHAR(9), 
-     p_numEndereco     INTEGER, 
-     p_rua             VARCHAR(50))
-LANGUAGE PLPGSQL
+
+
+
+-- REQUISITO 8: Faça uma função que retorne o número de amigos que ela possui.
+CREATE OR REPLACE FUNCTION conta_amigos
+    (p_codigo INTEGER) RETURNS INTEGER 
+LANGUAGE PLPGSQL 
 AS $$
+DECLARE 
+	num_amigos INTEGER;
 BEGIN
-    IF EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_cod)
-    THEN
-        RAISE EXCEPTION 'ERRO! Pessoa já inserida.';
-    ELSE
-        INSERT INTO pessoa
-        VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
-            p_email, p_homepage, p_cep, p_numEndereco, p_rua);
-    END IF;
+	SELECT COUNT(*) INTO num_amigos
+    FROM pessoa p, temAmizade ta
+    WHERE p.codigo = p_codigo AND 
+          p.codigo = ta.codigo_pessoa; 
+    RETURN num_amigos;
 END; $$;
 
-DROP PROCEDURE IF EXISTS insere_carro;
-CREATE OR REPLACE PROCEDURE insere_carro
-    (c_placa   VARCHAR(8),   
-     c_ano     INTEGER,   
-     c_cor     VARCHAR(30),   
-     c_modelo  VARCHAR(64))
+
+
+-- REQUISITO 12: atualiza o numero de carros
+-- trigger para quando insere em carros
+CREATE OR REPLACE FUNCTION conta_carros_insert() RETURNS TRIGGER
 LANGUAGE PLPGSQL
 AS $$
+DECLARE
+    n_carros INTEGER;
 BEGIN
-    IF EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
-    THEN
-        RAISE EXCEPTION 'ERRO! Carro já inserido.';
-    ELSE
-        INSERT INTO carro
-        VALUES(c_placa, c_ano, c_cor, c_modelo);
-    END IF;
+    SELECT COUNT(*) INTO n_carros
+    FROM pessoa p, possui po
+    WHERE p.codigo = NEW.codigo AND
+          po.codigo = NEW.codigo; 
+
+    UPDATE pessoa
+    SET  num_carros = n_carros
+    WHERE codigo = NEW.codigo;
+    RETURN NEW;
 END; $$;
 
-DROP PROCEDURE IF EXISTS insere_telefone;
-CREATE OR REPLACE PROCEDURE insere_telefone
-    (t_codigo  INTEGER, 
-     t_ddd     INTEGER, 
-     t_prefixo INTEGER, 
-     t_numero  INTEGER)
+DROP TRIGGER IF EXISTS t_aft_inst_row_possui_update_num
+	ON possui;
+CREATE TRIGGER t_aft_inst_row_possui_update_num
+	AFTER INSERT
+	ON possui
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_carros_insert();
+
+-- -- trigger para quando remove em carros
+CREATE OR REPLACE FUNCTION conta_carros_delete() RETURNS TRIGGER
 LANGUAGE PLPGSQL
 AS $$
+DECLARE
+    n_carros INTEGER;
 BEGIN
-    IF EXISTS (SELECT 1 FROM telefone WHERE codigo = t_codigo)
-    THEN
-        RAISE EXCEPTION 'ERRO! Telefone já inserido.';
-    ELSE
-        INSERT INTO telefone 
-        VALUES (t_codigo, t_ddd, t_prefixo, t_numero);
-    END IF;
-END; $$;
+    SELECT COUNT(*) INTO n_carros
+    FROM pessoa p, possui po
+    WHERE p.codigo = OLD.codigo AND
+        po.codigo = OLD.codigo; 
 
-DROP PROCEDURE IF EXISTS insere_possui;
-CREATE OR REPLACE PROCEDURE insere_possui
-    (p_codigo  INTEGER, 
-     c_placa   VARCHAR(10))
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_codigo)
-    THEN
-        RAISE EXCEPTION 'ERRO! Código não encontrado.';
-    ELSEIF NOT EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
-    THEN
-        RAISE EXCEPTION 'ERRO! Placa não encontrada.';
-    ELSE
-        INSERT INTO possui
-        VALUES(p_codigo, c_placa);
-    END IF;
+    UPDATE pessoa
+    SET  num_carros = n_carros
+    WHERE codigo = OLD.codigo;
+    RETURN NEW;
 END; $$;
+DROP TRIGGER IF EXISTS t_aft_del_row_possui_update_num
+	ON possui;
+CREATE TRIGGER t_aft_del_row_possui_update_num
+	AFTER DELETE
+	ON possui
+	FOR EACH ROW
+	EXECUTE PROCEDURE conta_carros_delete();
 
+
+
+
+-- REQUISITO 13. Faça uma view que retorne todas os nomes das pessoas que não tem amigos.
+CREATE OR REPLACE VIEW v_pessoas_sem_amigos AS
+	SELECT pnome
+    FROM pessoa
+    WHERE num_amigos = 0;

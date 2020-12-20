@@ -1,3 +1,5 @@
+
+
 INSERT INTO pessoa (codigo, pnome, sobrenome, data_nascimento, email, cep, numEndereco, rua)
 VALUES (111, 'Walter', 'White', '07-SEP-1959', 'walterwhite@gmail.com', '11111-111',  308, 'Rua Albuquerque')
 ;
