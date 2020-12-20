@@ -1,3 +1,7 @@
+
+
+
+
 -- Restrições da etapa 3
 
 -- Restrição 2: uma pessoa só pode ser apagada se a mesma não tiver amizade com ninguém. 
@@ -72,3 +76,11 @@ SELECT * FROM telefone WHERE codigo = 10;
 
 -- REQUISITO 7
 SELECT get_nome(10);
+
+-- REQUISITO 8
+SELECT codigo, num_amigos FROM pessoa;
+CALL insere_amizade(222, 333);
+SELECT conta_amigos(333);
+
+-- REQUISITO 13
+SELECT * FROM v_pessoas_sem_amigos;
