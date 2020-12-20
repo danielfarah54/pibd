@@ -341,6 +341,11 @@ BEGIN
         VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
             p_email, p_homepage, p_cep, p_numEndereco, p_rua);
     END IF;
+    -- Usando cursor implícito:
+    IF FOUND
+    THEN
+        RAISE NOTICE 'Pessoa inserida com sucesso.';
+    END IF;
 END; $$;
 
 DROP PROCEDURE IF EXISTS insere_carro;
@@ -397,3 +402,14 @@ BEGIN
         VALUES(p_codigo, c_placa);
     END IF;
 END; $$;
+
+-- REQUISITO 14
+-- Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
+CREATE OR REPLACE VIEW v_pessoas_carro_jaguar
+    AS
+    SELECT p.pNome as Pessoa, a.pNome as Amiga FROM temamizade t, pessoa p, pessoa a, carro c, possui ps
+    where c.modelo = 'Jaguar'
+    and p.codigo = ps.codigo
+    and c.placa = ps.placa
+    and p.codigo = t.codigo_pessoa
+    AND a.codigo = t.codigo_amiga;
