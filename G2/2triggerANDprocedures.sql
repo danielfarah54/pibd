@@ -220,19 +220,24 @@ END; $$;
 
 
 
--- REQUISITO 7
-DROP FUNCTION IF EXISTS get_nome;
-CREATE OR REPLACE FUNCTION get_nome (cod INTEGER) RETURNS TEXT
+-- requisito 7 (com cursor com parâmetros)
+DROP function IF EXISTS get_nome;
+CREATE OR REPLACE function get_nome(cod INTEGER) RETURNS TEXT
 LANGUAGE PLPGSQL
 AS $$
-DECLARE
-    s VARCHAR(101);
+declare
+	c_nome cursor (cod INTEGER) is
+		SELECT CONCAT(pnome, ' ', sobrenome)
+    	FROM pessoa
+    	WHERE codigo = cod;
+	nome varchar(101);
 BEGIN
-    SELECT CONCAT(pnome, ' ', sobrenome) INTO s
-    FROM pessoa
-    WHERE codigo = cod;
-    RETURN s;
-END; $$;
+	open c_nome(cod);
+	fetch c_nome into nome;
+	close c_nome;
+	return nome;
+END;
+$$;
 
 
 
