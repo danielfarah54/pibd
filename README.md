@@ -28,7 +28,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 11. ~~Faça um trigger que atualize automaticamente o número de amigos quando a mesma fizer uma nova amizade ou quando desfizer alguma amizade.~~
 12. ~~Faça um trigger que atualize automaticamente o número de carros da pessoa,  quando a mesma tiver mais um carro ou quando vencder um carro.~~
 13. ~~Faça uma view que retorne todas os nomes das pessoas que não tem amigos.~~
-14. Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
+14. ~~Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.~~
 
 ### Obrigatório utilizar:
 1. ~~Em pelo menos uma procedure/function utilizar um cursor implícito.~~
