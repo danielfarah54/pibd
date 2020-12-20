@@ -31,7 +31,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 14. Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
 
 ### Obrigatório utilizar:
-1. Em pelo menos uma procedure/function utilizar um cursor implícito.
+1. ~~Em pelo menos uma procedure/function utilizar um cursor implícito.~~
 2. Em pelo menos uma procedure/function utilizar um cursor explícito.
 3. Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado.
 4. Construir uma situação para a qual seja interessante a passagem de um cursor como parâmetro.
