@@ -4,6 +4,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 ## Trabalho 2 - Grupo 04
 ### Participantes da Etapa 04:
 * Marco Antonio B. Grivol (758619)
+* Daniel Farah (417513)
 
 ### Instruções
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
@@ -19,7 +20,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 3. ~~Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.~~
 4. ~~Faça um procedimento para cada tabela de seu esquema relacional para que permita a alteração de dados.~~
 5. Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
-6. Faça no mínimo 10 inserts para cada tabela utilizando as procedures criadas.
+6. ~~Faça no mínimo 10 inserts para cada tabela utilizando as procedures criadas.~~
 7. ~~Faça uma função que retorne o nome da pessoa.~~
 8. ~~Faça uma função que retorne o número de amigos que ela possui.~~
 9. ~~Faça um procedimento que atualize os atributos número de amigos de acordo com as informações presentes no banco~~

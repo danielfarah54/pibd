@@ -105,3 +105,48 @@ SELECT * FROM telefone WHERE codigo = 11;
 SELECT * FROM possui WHERE codigo = 11;
 CALL insere_possui (11, 'ccc3333');
 SELECT * FROM possui WHERE codigo = 11;
+
+-- REQUISITO 6
+CALL insere_pessoa(12, 'daniel', 'farah', '08-03-1991', 'daniel@teste.com', 'danielfarah.com', '13333444', 13, 'rua 34');
+CALL insere_pessoa(13, 'adilson', 'souza', '01-01-1991', 'adilson@teste.com', 'adilsonsouza.com', '13333444', 111, 'rua 11');
+CALL insere_pessoa(14, 'bruna', 'oliveira', '02-02-1992', 'bruna@teste.com', 'brunaoliveira.com', '13333444', 222, 'rua 22');
+CALL insere_pessoa(15, 'claudio', 'cortez', '03-03-1993', 'cortez@teste.com', 'cortez.com', '13333444', 333, 'rua 33');
+CALL insere_pessoa(16, 'ellen', 'page', '04-04-1994', 'ellen@teste.com', 'ellen.com', '13333444', 444, 'rua 44');
+CALL insere_pessoa(17, 'fabio', 'fagundes', '05-05-1995', 'fagundao@teste.com', 'ffagundes.com', '13333444', 555, 'rua 55');
+CALL insere_pessoa(18, 'gabriela', 'alem', '06-06-1996', 'alem@teste.com', 'alemdela.com', '13333444', 666, 'rua 66');
+CALL insere_pessoa(19, 'heloisa', 'ramos', '07-07-1997', 'heloramos@teste.com', 'hellohelo.com', '13333444', 777, 'rua 77');
+CALL insere_pessoa(20, 'icaro', 'silva', '08-08-1998', 'souzaicaro@teste.com', 'icarosouza.com', '13333444', 888, 'rua 88');
+CALL insere_pessoa(21, 'jesus', 'amado', '09-09-1999', 'ohlord@teste.com', 'hollyloved.com', '13333444', 999, 'rua 99');
+
+CALL insere_carro ('aaa1111', 2011, 'preto', 'golzinho bolinha');
+CALL insere_carro ('bbb2222', 2012, 'preto', 'golzinho bolinha');
+CALL insere_carro ('ccc3333', 2013, 'preto', 'golzinho bolinha');
+CALL insere_carro ('ddd4444', 2014, 'preto', 'golzinho bolinha');
+CALL insere_carro ('eee5555', 2015, 'preto', 'golzinho bolinha');
+CALL insere_carro ('fff6666', 2016, 'preto', 'golzinho bolinha');
+CALL insere_carro ('ggg7777', 2017, 'preto', 'golzinho bolinha');
+CALL insere_carro ('hhh8888', 2018, 'preto', 'golzinho bolinha');
+CALL insere_carro ('iii9999', 2019, 'preto', 'golzinho bolinha');
+CALL insere_carro ('jjj1010', 2020, 'preto', 'golzinho bolinha');
+
+CALL insere_telefone (12, 16, 91111, 4444);
+CALL insere_telefone (13, 16, 92222, 4444);
+CALL insere_telefone (14, 16, 93333, 4444);
+CALL insere_telefone (15, 16, 94444, 4444);
+CALL insere_telefone (16, 16, 95555, 4444);
+CALL insere_telefone (17, 16, 96666, 4444);
+CALL insere_telefone (18, 16, 97777, 4444);
+CALL insere_telefone (19, 16, 98888, 4444);
+CALL insere_telefone (20, 16, 99999, 4444);
+CALL insere_telefone (21, 16, 91010, 4444);
+
+CALL insere_possui (12, 'aaa1111');
+CALL insere_possui (13, 'bbb2222');
+CALL insere_possui (14, 'ccc3333');
+CALL insere_possui (15, 'ddd4444');
+CALL insere_possui (16, 'eee5555');
+CALL insere_possui (17, 'fff6666');
+CALL insere_possui (18, 'ggg7777');
+CALL insere_possui (19, 'hhh8888');
+CALL insere_possui (20, 'iii9999');
+CALL insere_possui (21, 'jjj1010');
