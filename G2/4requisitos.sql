@@ -73,7 +73,7 @@ CALL insere_pessoa(19, 'heloisa', 'ramos', '07-07-1997', 'heloramos@teste.com', 
 CALL insere_pessoa(20, 'icaro', 'silva', '08-08-1998', 'souzaicaro@teste.com', 'icarosouza.com', '13333444', 888, 'rua 88');
 CALL insere_pessoa(21, 'jesus', 'amado', '09-09-1999', 'ohlord@teste.com', 'hollyloved.com', '13333444', 999, 'rua 99');
 
-CALL insere_carro ('aaa1111', 2011, 'preto', 'golzinho bolinha');
+CALL insere_carro ('aaa1111', 2011, 'preto', 'Jaguar');
 CALL insere_carro ('bbb2222', 2012, 'preto', 'golzinho bolinha');
 CALL insere_carro ('ccc3333', 2013, 'preto', 'golzinho bolinha');
 CALL insere_carro ('ddd4444', 2014, 'preto', 'golzinho bolinha');
@@ -133,3 +133,12 @@ SELECT conta_amigos(333);
 -- REQUISITO 13
 -- Retorna todas pessoas sem amziades :(
 SELECT * FROM v_pessoas_sem_amigos;
+
+-- REQUISITO 14
+CALL insere_amizade (12, 13);
+CALL insere_amizade (12, 14);
+SELECT * FROM v_pessoas_carro_jaguar;
+
+
+-- REQUISITO 5
+insert into pessoa(pNome, sobrenome, data_nascimento, email, homepage, cep, numEndereco, rua) values ('teste', 'de', '01-01-2020', 'triger', 'sem', 'codigo', 111, 'parametro');

@@ -346,6 +346,11 @@ BEGIN
         VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
             p_email, p_homepage, p_cep, p_numEndereco, p_rua);
     END IF;
+    -- Usando cursor implícito:
+    IF FOUND
+    THEN
+        RAISE NOTICE 'Pessoa inserida com sucesso.';
+    END IF;
 END; $$;
 
 DROP PROCEDURE IF EXISTS insere_carro;
@@ -402,3 +407,35 @@ BEGIN
         VALUES(p_codigo, c_placa);
     END IF;
 END; $$;
+
+-- REQUISITO 14
+-- Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
+CREATE OR REPLACE VIEW v_pessoas_carro_jaguar
+    AS
+    SELECT p.pNome as Pessoa, a.pNome as Amiga FROM temamizade t, pessoa p, pessoa a, carro c, possui ps
+    where c.modelo = 'Jaguar'
+    and p.codigo = ps.codigo
+    and c.placa = ps.placa
+    and p.codigo = t.codigo_pessoa
+    AND a.codigo = t.codigo_amiga;
+
+-- REQUISITO 5
+-- Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
+CREATE OR REPLACE FUNCTION insere_pessoa_sem_codigo() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF NEW.codigo IS NULL
+    THEN
+        SELECT gera_codigo_pessoa() INTO NEW.codigo;
+    END IF;
+    RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS t_bef_ins_row_pessoa
+    ON pessoa;
+CREATE TRIGGER t_bef_ins_row_pessoa
+    BEFORE INSERT
+    ON pessoa
+    FOR EACH ROW
+    EXECUTE PROCEDURE insere_pessoa_sem_codigo();
