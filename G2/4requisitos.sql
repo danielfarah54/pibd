@@ -138,3 +138,7 @@ SELECT * FROM v_pessoas_sem_amigos;
 CALL insere_amizade (12, 13);
 CALL insere_amizade (12, 14);
 SELECT * FROM v_pessoas_carro_jaguar;
+
+
+-- REQUISITO 5
+insert into pessoa(pNome, sobrenome, data_nascimento, email, homepage, cep, numEndereco, rua) values ('teste', 'de', '01-01-2020', 'triger', 'sem', 'codigo', 111, 'parametro');

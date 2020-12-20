@@ -20,7 +20,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 2. ~~Altere a tabela da pessoa adicionando um atributo que conta o número de carros da pessoa, e adicionando um atributo que conta o número de amigos da pessoa. Ambos os atributos devem ser inteiros.~~
 3. ~~Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.~~
 4. ~~Faça um procedimento para cada tabela de seu esquema relacional para que permita a alteração de dados.~~
-5. Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
+5. ~~Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).~~
 6. ~~Faça no mínimo 10 inserts para cada tabela utilizando as procedures criadas.~~
 7. ~~Faça uma função que retorne o nome da pessoa.~~
 8. ~~Faça uma função que retorne o número de amigos que ela possui.~~
