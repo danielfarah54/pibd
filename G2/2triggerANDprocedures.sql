@@ -413,3 +413,24 @@ CREATE OR REPLACE VIEW v_pessoas_carro_jaguar
     and c.placa = ps.placa
     and p.codigo = t.codigo_pessoa
     AND a.codigo = t.codigo_amiga;
+
+-- REQUISITO 5
+-- Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
+CREATE OR REPLACE FUNCTION insere_pessoa_sem_codigo() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF NEW.codigo IS NULL
+    THEN
+        SELECT gera_codigo_pessoa() INTO NEW.codigo;
+    END IF;
+    RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS t_bef_ins_row_pessoa
+    ON pessoa;
+CREATE TRIGGER t_bef_ins_row_pessoa
+    BEFORE INSERT
+    ON pessoa
+    FOR EACH ROW
+    EXECUTE PROCEDURE insere_pessoa_sem_codigo();
