@@ -6,6 +6,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 * Daniel Farah (417513)
 * Felipe Francisco Berreta (422649)
 * Marco Antonio B. Grivol (758619)
+* Pedro Henrique Grespan Carneiro (761029)
 
 ### Instruções
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
@@ -32,7 +33,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 14. ~~Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.~~
 
 ### Obrigatório utilizar:
-1. ~~Em pelo menos uma procedure/function utilizar um cursor implícito.~~
-2. Em pelo menos uma procedure/function utilizar um cursor explícito.
-3. Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado.
+1. Em pelo menos uma procedure/function utilizar um cursor implícito. (feito)
+2. Em pelo menos uma procedure/function utilizar um cursor explícito. 
+3. Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado. (feito)
 4. Construir uma situação para a qual seja interessante a passagem de um cursor como parâmetro.
