@@ -3,8 +3,9 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 
 ## Trabalho 2 - Grupo 04
 ### Participantes da Etapa 04:
-* Marco Antonio B. Grivol (758619)
 * Daniel Farah (417513)
+* Felipe Francisco Berreta (422649)
+* Marco Antonio B. Grivol (758619)
 
 ### Instruções
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
