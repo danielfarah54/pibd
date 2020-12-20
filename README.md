@@ -5,6 +5,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 ### Participantes da Etapa 04:
 * Marco Antonio B. Grivol (758619)
 * Daniel Farah (417513)
+* Pedro Henrique Grespan Carneiro (761029)
 
 ### Instruções
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
