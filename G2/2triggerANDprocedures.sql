@@ -341,6 +341,11 @@ BEGIN
         VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
             p_email, p_homepage, p_cep, p_numEndereco, p_rua);
     END IF;
+    -- Usando cursor implícito:
+    IF FOUND
+    THEN
+        RAISE NOTICE 'Pessoa inserida com sucesso.';
+    END IF;
 END; $$;
 
 DROP PROCEDURE IF EXISTS insere_carro;
