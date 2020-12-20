@@ -1,3 +1,7 @@
+
+
+
+
 -- Restrições da etapa 3
 
 -- Restrição 2: uma pessoa só pode ser apagada se a mesma não tiver amizade com ninguém. 
@@ -58,6 +62,7 @@ SELECT codigo, pnome, num_amigos, num_carros
 FROM pessoa;
 
 -- Requisito 4
+-- Altera dados de pessoa, carro e telefone (telefone cria um novo caso nao exista)
 SELECT * FROM pessoa WHERE codigo = 10;
 CALL altera_pessoa(10, 'Jhonny', 'Silverhand', current_date, 'cyber@punk.com', NULL, '99775-954', '2077', 'Night City');
 SELECT * FROM pessoa WHERE codigo = 10;
@@ -71,4 +76,15 @@ CALL altera_telefone(10, 16, 9, 38264321);
 SELECT * FROM telefone WHERE codigo = 10;
 
 -- REQUISITO 7
+-- Retorna o nome de uma pessoa
 SELECT get_nome(10);
+
+-- REQUISITO 8
+-- Conta os amigos de uma pessoa
+SELECT codigo, num_amigos FROM pessoa;
+CALL insere_amizade(222, 333);
+SELECT conta_amigos(333);
+
+-- REQUISITO 13
+-- Retorna todas pessoas sem amziades :(
+SELECT * FROM v_pessoas_sem_amigos;
