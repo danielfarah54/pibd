@@ -6,6 +6,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 * Daniel Farah (417513)
 * Felipe Francisco Berreta (422649)
 * Marco Antonio B. Grivol (758619)
+* Pedro Henrique Grespan Carneiro (761029)
 
 ### Instruções
 1. Verifique se está na versão mais recente do repositório através do comando: git pull
@@ -25,7 +26,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 7. ~~Faça uma função que retorne o nome da pessoa.~~
 8. ~~Faça uma função que retorne o número de amigos que ela possui.~~
 9. ~~Faça um procedimento que atualize os atributos número de amigos de acordo com as informações presentes no banco~~
-10. Faça um procedimento que atualize o número de pessoas de acordo com as informações presentes no banco. (comentario: procedimento nao retorna nada, o que seria esse numero de pessoas entao?)
+10. ~~Faça um procedimento que atualize o número de pessoas de acordo com as informações presentes no banco.~~
 11. ~~Faça um trigger que atualize automaticamente o número de amigos quando a mesma fizer uma nova amizade ou quando desfizer alguma amizade.~~
 12. ~~Faça um trigger que atualize automaticamente o número de carros da pessoa,  quando a mesma tiver mais um carro ou quando vencder um carro.~~
 13. ~~Faça uma view que retorne todas os nomes das pessoas que não tem amigos.~~
@@ -33,6 +34,6 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 
 ### Obrigatório utilizar:
 1. ~~Em pelo menos uma procedure/function utilizar um cursor implícito.~~
-2. Em pelo menos uma procedure/function utilizar um cursor explícito.
-3. Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado.
+2. Em pelo menos uma procedure/function utilizar um cursor explícito. 
+3. ~~Em pelo menos uma procedure/function utilizar um cursor explícito parmetrizado.~~
 4. Construir uma situação para a qual seja interessante a passagem de um cursor como parâmetro.
