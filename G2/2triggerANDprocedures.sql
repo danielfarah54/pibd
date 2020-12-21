@@ -383,14 +383,16 @@ END; $$;
 
 -- REQUISITO 10
 DROP PROCEDURE IF EXISTS totalPessoas;
-CREATE OR REPLACE PROCEDURE totalPessoas
-    (total             INTEGER)
+CREATE OR REPLACE PROCEDURE totalPessoas ()
 LANGUAGE PLPGSQL
 AS $$
+	DECLARE 
+    	total             INTEGER;   	
 BEGIN	
 	SELECT COUNT(*) INTO total
 	FROM pessoa;	    
 END; $$;
+
 
 
 
