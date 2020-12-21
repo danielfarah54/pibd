@@ -26,7 +26,7 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de
 7. ~~Faça uma função que retorne o nome da pessoa.~~
 8. ~~Faça uma função que retorne o número de amigos que ela possui.~~
 9. ~~Faça um procedimento que atualize os atributos número de amigos de acordo com as informações presentes no banco~~
-10. Faça um procedimento que atualize o número de pessoas de acordo com as informações presentes no banco. (comentario: procedimento nao retorna nada, o que seria esse numero de pessoas entao?)
+10. ~~Faça um procedimento que atualize o número de pessoas de acordo com as informações presentes no banco.~~
 11. ~~Faça um trigger que atualize automaticamente o número de amigos quando a mesma fizer uma nova amizade ou quando desfizer alguma amizade.~~
 12. ~~Faça um trigger que atualize automaticamente o número de carros da pessoa,  quando a mesma tiver mais um carro ou quando vencder um carro.~~
 13. ~~Faça uma view que retorne todas os nomes das pessoas que não tem amigos.~~

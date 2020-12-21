@@ -1,4 +1,9 @@
--- Parte do REQUISITO 3 (Etapa 4)
+-- IMPORTANTE: alguns dos requisitos foram implementados em outros arquivos 
+-- UTILIZE CTRL-F e busque: REQUISITO N para encontrar o requisito de numero N
+-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+-- Parte do REQUISITO 3 (Etapa 3)
 -- Insere a amizade para as duas pessoas
 CREATE OR REPLACE PROCEDURE insere_amizade
     (codigo_pessoa INTEGER, 
@@ -76,6 +81,95 @@ BEGIN
         novo_codigo = 0;
     END IF;
    RETURN novo_codigo;
+END; $$;
+
+
+
+
+-- REQUISITO 3
+-- Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.
+DROP PROCEDURE IF EXISTS insere_pessoa;
+CREATE OR REPLACE PROCEDURE insere_pessoa
+    (p_cod             INTEGER, 
+     p_nome            VARCHAR(50), 
+     p_sobrenome       VARCHAR(50), 
+     p_data_nascimento date, 
+     p_email           VARCHAR(64), 
+     p_homepage        VARCHAR(64), 
+     p_cep             VARCHAR(9), 
+     p_numEndereco     INTEGER, 
+     p_rua             VARCHAR(50))
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_cod)
+    THEN
+        RAISE EXCEPTION 'ERRO! Pessoa já inserida.';
+    ELSE
+        INSERT INTO pessoa
+        VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
+            p_email, p_homepage, p_cep, p_numEndereco, p_rua);
+    END IF;
+    -- Usando cursor implícito:
+    IF FOUND
+    THEN
+        RAISE NOTICE 'Pessoa inserida com sucesso.';
+    END IF;
+END; $$;
+
+DROP PROCEDURE IF EXISTS insere_carro;
+CREATE OR REPLACE PROCEDURE insere_carro
+    (c_placa   VARCHAR(8),   
+     c_ano     INTEGER,   
+     c_cor     VARCHAR(30),   
+     c_modelo  VARCHAR(64))
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
+    THEN
+        RAISE EXCEPTION 'ERRO! Carro já inserido.';
+    ELSE
+        INSERT INTO carro
+        VALUES(c_placa, c_ano, c_cor, c_modelo);
+    END IF;
+END; $$;
+
+DROP PROCEDURE IF EXISTS insere_telefone;
+CREATE OR REPLACE PROCEDURE insere_telefone
+    (t_codigo  INTEGER, 
+     t_ddd     INTEGER, 
+     t_prefixo INTEGER, 
+     t_numero  INTEGER)
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM telefone WHERE codigo = t_codigo)
+    THEN
+        RAISE EXCEPTION 'ERRO! Telefone já inserido.';
+    ELSE
+        INSERT INTO telefone 
+        VALUES (t_codigo, t_ddd, t_prefixo, t_numero);
+    END IF;
+END; $$;
+
+DROP PROCEDURE IF EXISTS insere_possui;
+CREATE OR REPLACE PROCEDURE insere_possui
+    (p_codigo  INTEGER, 
+     c_placa   VARCHAR(10))
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_codigo)
+    THEN
+        RAISE EXCEPTION 'ERRO! Código não encontrado.';
+    ELSEIF NOT EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
+    THEN
+        RAISE EXCEPTION 'ERRO! Placa não encontrada.';
+    ELSE
+        INSERT INTO possui
+        VALUES(p_codigo, c_placa);
+    END IF;
 END; $$;
 
 
@@ -220,6 +314,32 @@ END; $$;
 
 
 
+
+-- REQUISITO 5
+-- Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
+CREATE OR REPLACE FUNCTION insere_pessoa_sem_codigo() RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+    IF NEW.codigo IS NULL
+    THEN
+        SELECT gera_codigo_pessoa() INTO NEW.codigo;
+    END IF;
+    RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS t_bef_ins_row_pessoa
+    ON pessoa;
+CREATE TRIGGER t_bef_ins_row_pessoa
+    BEFORE INSERT
+    ON pessoa
+    FOR EACH ROW
+    EXECUTE PROCEDURE insere_pessoa_sem_codigo();
+
+
+
+
+
 -- requisito 7 (com cursor com parâmetros)
 DROP function IF EXISTS get_nome;
 CREATE OR REPLACE function get_nome(cod INTEGER) RETURNS TEXT
@@ -240,6 +360,7 @@ END;
 $$;
 
 
+-- REQUISITO 6: implementado em 4requisitos.sql
 
 
 -- REQUISITO 8: Faça uma função que retorne o número de amigos que ela possui.
@@ -256,6 +377,22 @@ BEGIN
           p.codigo = ta.codigo_pessoa; 
     RETURN num_amigos;
 END; $$;
+
+
+
+
+-- REQUISITO 10
+DROP PROCEDURE IF EXISTS totalPessoas;
+CREATE OR REPLACE PROCEDURE totalPessoas
+    (total             INTEGER)
+LANGUAGE PLPGSQL
+AS $$
+BEGIN	
+	SELECT COUNT(*) INTO total
+	FROM pessoa;	    
+END; $$;
+
+
 
 
 
@@ -322,91 +459,6 @@ CREATE OR REPLACE VIEW v_pessoas_sem_amigos AS
 
 
 
--- REQUISITO 3
--- Faça um procedimento para cada tabela de seu esquema relacional para que permita a inserção de dados.
-DROP PROCEDURE IF EXISTS insere_pessoa;
-CREATE OR REPLACE PROCEDURE insere_pessoa
-    (p_cod             INTEGER, 
-     p_nome            VARCHAR(50), 
-     p_sobrenome       VARCHAR(50), 
-     p_data_nascimento date, 
-     p_email           VARCHAR(64), 
-     p_homepage        VARCHAR(64), 
-     p_cep             VARCHAR(9), 
-     p_numEndereco     INTEGER, 
-     p_rua             VARCHAR(50))
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_cod)
-    THEN
-        RAISE EXCEPTION 'ERRO! Pessoa já inserida.';
-    ELSE
-        INSERT INTO pessoa
-        VALUES (p_cod, p_nome, p_sobrenome, p_data_nascimento,
-            p_email, p_homepage, p_cep, p_numEndereco, p_rua);
-    END IF;
-    -- Usando cursor implícito:
-    IF FOUND
-    THEN
-        RAISE NOTICE 'Pessoa inserida com sucesso.';
-    END IF;
-END; $$;
-
-DROP PROCEDURE IF EXISTS insere_carro;
-CREATE OR REPLACE PROCEDURE insere_carro
-    (c_placa   VARCHAR(8),   
-     c_ano     INTEGER,   
-     c_cor     VARCHAR(30),   
-     c_modelo  VARCHAR(64))
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
-    THEN
-        RAISE EXCEPTION 'ERRO! Carro já inserido.';
-    ELSE
-        INSERT INTO carro
-        VALUES(c_placa, c_ano, c_cor, c_modelo);
-    END IF;
-END; $$;
-
-DROP PROCEDURE IF EXISTS insere_telefone;
-CREATE OR REPLACE PROCEDURE insere_telefone
-    (t_codigo  INTEGER, 
-     t_ddd     INTEGER, 
-     t_prefixo INTEGER, 
-     t_numero  INTEGER)
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF EXISTS (SELECT 1 FROM telefone WHERE codigo = t_codigo)
-    THEN
-        RAISE EXCEPTION 'ERRO! Telefone já inserido.';
-    ELSE
-        INSERT INTO telefone 
-        VALUES (t_codigo, t_ddd, t_prefixo, t_numero);
-    END IF;
-END; $$;
-
-DROP PROCEDURE IF EXISTS insere_possui;
-CREATE OR REPLACE PROCEDURE insere_possui
-    (p_codigo  INTEGER, 
-     c_placa   VARCHAR(10))
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pessoa WHERE codigo = p_codigo)
-    THEN
-        RAISE EXCEPTION 'ERRO! Código não encontrado.';
-    ELSEIF NOT EXISTS (SELECT 1 FROM carro WHERE placa = c_placa)
-    THEN
-        RAISE EXCEPTION 'ERRO! Placa não encontrada.';
-    ELSE
-        INSERT INTO possui
-        VALUES(p_codigo, c_placa);
-    END IF;
-END; $$;
 
 -- REQUISITO 14
 -- Faça uma view que retorne o nome das pessoas que tem o carro modelo ‘Jaguar’ e dos seus amigos.
@@ -419,23 +471,5 @@ CREATE OR REPLACE VIEW v_pessoas_carro_jaguar
     and p.codigo = t.codigo_pessoa
     AND a.codigo = t.codigo_amiga;
 
--- REQUISITO 5
--- Faça uma trigger que use sequências para a inserção das chaves das tuplas de pessoa (disparar antes de inserção na tabela pessoa).
-CREATE OR REPLACE FUNCTION insere_pessoa_sem_codigo() RETURNS TRIGGER
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-    IF NEW.codigo IS NULL
-    THEN
-        SELECT gera_codigo_pessoa() INTO NEW.codigo;
-    END IF;
-    RETURN NEW;
-END;
-$$;
-DROP TRIGGER IF EXISTS t_bef_ins_row_pessoa
-    ON pessoa;
-CREATE TRIGGER t_bef_ins_row_pessoa
-    BEFORE INSERT
-    ON pessoa
-    FOR EACH ROW
-    EXECUTE PROCEDURE insere_pessoa_sem_codigo();
+
+
