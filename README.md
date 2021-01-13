@@ -1,5 +1,5 @@
-# Porjeto e ImplementaÃ§ao de Banco de Dados
-RepositÃ³rio para atividades da disciplina Projeto e ImplementaÃ§Ã£o de Banco de Dados (ENPE/2020)
+# Projeto e Implementação de Banco de Dados
+Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados (ENPE/2020)
 
 ## Trabalho 2 - Grupo 04
 ### Participantes da Etapa 04:
@@ -8,10 +8,14 @@ RepositÃ³rio para atividades da disciplina Projeto e ImplementaÃ§Ã£o de Banco de
 * Marco Antonio B. Grivol (758619)
 * Pedro Henrique Grespan Carneiro (761029)
 
-### InstruÃ§Ãµes
-1. Verifique se estÃ¡ na versÃ£o mais recente do repositÃ³rio atravÃ©s do comando: git pull
-1. Execute em sequÃªncia:
-   1. 1create.sql
-   2. 2triggerANDprocedure.sql
-   3. 3popula.sql
-   4. 4requisitos.sql
+### Instruções
+1. Verifique se está na versão mais recente do repositório através do comando "git pull".
+2. Criei um novo banco de dados no pgAdmin4 chamado "pibd".
+1. Execute em sequência:
+    1. 1create.sql
+    2. 2triggerANDprocedure.sql
+    3. 3popula.sql
+    4. 4requisitos.sql
+3. Abra o projeto em uma IDE (Eclipse preferencialmente).
+4. Se necessário, altere as informações de login no arquivo Tela.java (este projeto utiliza postgres como usuario e senha padrões).
+4. Execute o arquivo Tela.java.
