@@ -137,7 +137,6 @@ public final class InsereHelper {
 		parse = input.split(", ");
 		codigo_pessoa = Integer.parseInt(parse[0]);
 		codigo_amiga = Integer.parseInt(parse[1]);
-		System.out.printf("data_amizade = (%s)\n", parse[2]);
 		if (parse.length == 3)
 			data_amizade = Date.valueOf(parse[2]);
 		

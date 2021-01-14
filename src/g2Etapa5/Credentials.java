@@ -3,7 +3,7 @@ package g2Etapa5;
 public final class Credentials {
 	static final String USER = "postgres";
 	static final String SENHA = "postgres";
-	static final String DATABASE_URL = "jdbc:postgresql://localhost/pibd";
+	static final String DATABASE_URL = "jdbc:postgresql://localhost/test";
 
 	public static String getUser() {
 		return USER;
