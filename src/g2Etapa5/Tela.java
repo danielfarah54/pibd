@@ -82,7 +82,6 @@ class ActionEventDemo implements ActionListener {
 				break;
 			default:
 				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPessoa());
-
 			}
 		}
 		if (e.getSource() == sendInsere) {
@@ -91,10 +90,19 @@ class ActionEventDemo implements ActionListener {
 			System.out.printf("input = %s\n tabela=%s\n\n", input, tabela);
 			switch (tabela) {
 			case "pessoa":
-				ta.setText(tfInsere.getText() + "\n" + Seleciona.selectPessoa());
+				Insere.inserePessoa(input);
 				break;
 			case "carro":
-				 Insere.insereCarro(tfInsere.getText());
+				 Insere.insereCarro(input);
+				break;
+			case "possui":
+				Insere.inserePossui(input);
+				break;
+			case "telefone":
+				Insere.insereTelefone(input);
+				break;
+			case "temAmizade":
+				Insere.insereAmizade(input);
 				break;
 			default:
 				System.out.printf(tfInsere.getText() + "\n");
