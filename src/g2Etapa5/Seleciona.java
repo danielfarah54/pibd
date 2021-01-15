@@ -16,7 +16,7 @@ public class Seleciona {
 	static ResultSetMetaData md = null;
 	static String sel = "";
 	
-	static String selectPessoa() {
+	static String selectPessoa(String pk) {
 		try {
 			sel = "";
 			
@@ -24,12 +24,18 @@ public class Seleciona {
 			con = DriverManager.getConnection(Credentials.getDatabaseUrl(), 
 											  Credentials.getUser(), 
 											  Credentials.getSenha());
+
 			// Criar o comando
 			stm = con.createStatement();
-			rs = stm.executeQuery("select * from pessoa");
+			if (pk.equals("-1"))
+				rs = stm.executeQuery("select * from pessoa");
+			else
+				rs = stm.executeQuery("select * from pessoa where codigo = " + pk);
+
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
 			int nroColunas = md.getColumnCount();
+			
 			// Exibir os metadados/dados
 			for (int i = 1; i <= nroColunas; i++) {
 				System.out.printf("%s\t", md.getColumnName(i));
@@ -50,6 +56,7 @@ public class Seleciona {
 			int numEndereco;
 			String rua;
 			Pessoa pessoa;
+
 			// Usar os dados e mostra-los
 			while (rs.next()) {
 				pessoa = new Pessoa();
@@ -87,6 +94,7 @@ public class Seleciona {
 								+ umaPessoa.getHomepage() + ", " + umaPessoa.getCep() + ", "
 								+ umaPessoa.getNumEndereco() + ", " + umaPessoa.getRua());
 			}
+
 			// Fechar os objetos
 			rs.close();
 			stm.close();
@@ -99,7 +107,7 @@ public class Seleciona {
 		return sel;
 	}
 
-	static String selectCarro() {
+	static String selectCarro(String pk) {
 		try {
 			sel = "";
 
@@ -107,12 +115,18 @@ public class Seleciona {
 			con = DriverManager.getConnection(Credentials.getDatabaseUrl(), 
 					  Credentials.getUser(), 
 					  Credentials.getSenha());
+
 			// Criar o comando
 			stm = con.createStatement();
-			rs = stm.executeQuery("select * from carro");
+			if (pk.equals("-1"))
+				rs = stm.executeQuery("select * from carro");
+			else
+				rs = stm.executeQuery("select * from carro where placa = " + pk);
+
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
 			int nroColunas = md.getColumnCount();
+
 			// Exibir os metadados/dados
 			for (int i = 1; i <= nroColunas; i++) {
 				System.out.printf("%s\t", md.getColumnName(i));
@@ -128,6 +142,7 @@ public class Seleciona {
 			String cor;
 			String modelo;
 			Carro carro;
+
 			// Usar os dados e mostra-los
 			while (rs.next()) {
 				carro = new Carro();
@@ -151,6 +166,7 @@ public class Seleciona {
 						umCarro.getPlaca() + ", " + umCarro.getAno() + ", " + umCarro.getCor() + ", " +
 								umCarro.getModelo());
 			}
+
 			// Fechar os objetos
 			rs.close();
 			stm.close();
@@ -163,7 +179,7 @@ public class Seleciona {
 		return sel;
 	}
 
-	static String selectPossui() {
+	static String selectPossui(String pk) {
 		try {
 			sel = "";
 
@@ -171,12 +187,21 @@ public class Seleciona {
 			con = DriverManager.getConnection(Credentials.getDatabaseUrl(), 
 					  Credentials.getUser(), 
 					  Credentials.getSenha());
+
 			// Criar o comando
 			stm = con.createStatement();
-			rs = stm.executeQuery("select * from possui");
+			if (pk.equals("-1"))
+				rs = stm.executeQuery("select * from possui");
+			else {
+				String pk1 = pk.split(", ")[0];
+				String pk2 = pk.split(", ")[1];
+				rs = stm.executeQuery("select * from possui where codigo = " + pk1 + "and placa = " + pk2);
+			}
+
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
 			int nroColunas = md.getColumnCount();
+			
 			// Exibir os metadados/dados
 			for (int i = 1; i <= nroColunas; i++) {
 				System.out.printf("%s\t", md.getColumnName(i));
@@ -190,6 +215,7 @@ public class Seleciona {
 			int codigo;
 			String placa;
 			Possui possui;
+
 			// Usar os dados e mostra-los
 			while (rs.next()) {
 				possui = new Possui();
@@ -207,6 +233,7 @@ public class Seleciona {
 				System.out.printf("%s\n",
 						umaPosse.getCodigo() + ", " + umaPosse.getPlaca());
 			}
+
 			// Fechar os objetos
 			rs.close();
 			stm.close();
@@ -219,7 +246,7 @@ public class Seleciona {
 		return sel;
 	}
 
-	static String selectTelefone() {
+	static String selectTelefone(String pk) {
 		try {
 			sel = "";
 
@@ -227,12 +254,18 @@ public class Seleciona {
 			con = DriverManager.getConnection(Credentials.getDatabaseUrl(), 
 					  Credentials.getUser(), 
 					  Credentials.getSenha());
+
 			// Criar o comando
 			stm = con.createStatement();
-			rs = stm.executeQuery("select * from telefone");
+			if (pk.equals("-1"))
+				rs = stm.executeQuery("select * from telefone");
+			else
+				rs = stm.executeQuery("select * from telefone where codigo = " + pk);
+
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
 			int nroColunas = md.getColumnCount();
+
 			// Exibir os metadados/dados
 			for (int i = 1; i <= nroColunas; i++) {
 				System.out.printf("%s\t", md.getColumnName(i));
@@ -248,6 +281,7 @@ public class Seleciona {
 			int prefixo;
 			int numero;
 			Telefone telefone;
+
 			// Usar os dados e mostra-los
 			while (rs.next()) {
 				telefone = new Telefone();
@@ -271,6 +305,7 @@ public class Seleciona {
 						 umTelefone.getCodigo() + ", " + "("+ umTelefone.getDdd() + ")" +
 						 umTelefone.getPrefixo() + "-" + umTelefone.getNumero());
 			}
+
 			// Fechar os objetos
 			rs.close();
 			stm.close();
@@ -283,7 +318,7 @@ public class Seleciona {
 		return sel;
 	}
 
-	static String selectTemAmizade() {
+	static String selectTemAmizade(String pk) {
 		try {
 			sel = "";
 
@@ -291,12 +326,21 @@ public class Seleciona {
 			con = DriverManager.getConnection(Credentials.getDatabaseUrl(), 
 					  Credentials.getUser(), 
 					  Credentials.getSenha());
+
 			// Criar o comando
 			stm = con.createStatement();
-			rs = stm.executeQuery("select * from temAmizade");
+			if (pk.equals("-1"))
+				rs = stm.executeQuery("select * from temAmizade");
+			else {
+				String pk1 = pk.split(", ")[0];
+				String pk2 = pk.split(", ")[1];
+				rs = stm.executeQuery("select * from temAmizade where codigo_pessoa = " + pk1 + "and codigo_amiga = " + pk2);
+			}
+
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
 			int nroColunas = md.getColumnCount();
+			
 			// Exibir os metadados/dados
 			for (int i = 1; i <= nroColunas; i++) {
 				System.out.printf("%s\t", md.getColumnName(i));
@@ -311,6 +355,7 @@ public class Seleciona {
 			int codigo_amiga;
 			Date data_amizade;
 			TemAmizade temAmizade;
+			
 			// Usar os dados e mostra-los
 			while (rs.next()) {
 				temAmizade = new TemAmizade();
@@ -332,6 +377,7 @@ public class Seleciona {
 						umaAmizade.getCodigo_pessoa() + ", " + umaAmizade.getCodigo_amiga() + ", " + 
 						umaAmizade.getData_amizade());
 			}
+			
 			// Fechar os objetos
 			rs.close();
 			stm.close();
