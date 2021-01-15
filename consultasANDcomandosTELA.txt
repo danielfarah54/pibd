@@ -29,9 +29,9 @@ carro: 3333333, Volvo V70, 1998
 
 
 possui: 0, 1111111
-possui: 3, 1111111
 possui: 1, 2222222
 possui: 2, 3333333
+possui: 3, 1111111
 
 
 temAmizade: 0, 1, 1999-07-08
@@ -39,6 +39,6 @@ temAmizade: 0, 2
 temAmizade: 0, 3
 
 
-telefone: 0, 19, 2569, 0000
+telefone: 0, 19, 2569, 1010
 telefone: 1, 35, 9988, 1111
 telefone: 2, 16, 3576, 2222
