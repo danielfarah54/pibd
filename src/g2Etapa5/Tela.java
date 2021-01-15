@@ -6,8 +6,8 @@ import java.awt.event.*;
 
 class ActionEventDemo implements ActionListener {
 	JFrame frame = new JFrame("Consulta da base de dados");
-	JButton sendSeleciona = new JButton("Consulta tabela");
-	JButton sendInsere = new JButton("Insere na tabela");
+	JButton sendSeleciona = new JButton("Consultar");
+	JButton sendInsere = new JButton("Inserir");
 
 	JLabel labelSeleciona = new JLabel("Digite uma tabela: ");
 	JLabel labelInsere = new JLabel("Insere na tabela: ");
@@ -27,7 +27,7 @@ class ActionEventDemo implements ActionListener {
 		frame.setSize(800, 600);
 		// Creating the MenuBar and adding components
 		JMenuBar mb = new JMenuBar();
-		JMenu m1 = new JMenu("FILE");
+		JMenu m1 = new JMenu("File");
 		JMenu m2 = new JMenu("Help");
 		mb.add(m1);
 		mb.add(m2);
