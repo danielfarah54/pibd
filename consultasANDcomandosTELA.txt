@@ -1,16 +1,18 @@
 -----consultas-----
 pessoa
-pessoa 222
+pessoa 0
 
 carro
+carro 1111111
 
 possui
+possui 0
 
 telefone
-telefone 12
+telefone 0
 
 temAmizade
-temAmizade 222, 333
+temAmizade 0
 
 
 
