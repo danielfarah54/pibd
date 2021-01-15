@@ -1,13 +1,16 @@
 -----consultas-----
 pessoa
+pessoa 222
 
 carro
 
 possui
 
 telefone
+telefone 12
 
 temAmizade
+temAmizade 222, 333
 
 
 

@@ -24,12 +24,15 @@ Repositório para atividades da disciplina Projeto e Implementação de Banco de Da
 1. Consulta:
 	1. carro
 	2. pessoa
-	3. possui
-	4. telefone
-	5. temAmizade
+	3. pessoa codigo_pessoa
+	4. possui
+	5. telefone
+	6. telefone codigo_pessoa
+	7. temAmizade
+	8. temAmizade codigo_pessoa, codigo_amiga
 2. Inserção:
 	1. carro: placa, modelo, ano, cor
-	2. pessoa: nome, sobrenome, data de nascimento (aaaa-dd-mm), email, homepage, cep, número da rua, nome da rua
-	3. possui: código da pessoa, placa
-	4. telefone: código da pessoa, ddd, prefixo, número
-	5. temAmizade: código da pessoa, código da amiga, data da amizade (aaaa-dd-mm)
+	2. pessoa: nome, sobrenome, data_nascimento (aaaa-dd-mm), email, homepage, cep, numero_rua, nome_rua
+	3. possui: codigo_pessoa, placa
+	4. telefone: codigo_pessoa, ddd, prefixo, numero
+	5. temAmizade: codigo_pessoa, codigo_amiga, data_amizade (aaaa-dd-mm)

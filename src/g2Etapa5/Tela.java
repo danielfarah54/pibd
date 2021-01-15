@@ -63,28 +63,31 @@ class ActionEventDemo implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == sendSeleciona) {
-			String tabela = tfSeleciona.getText();
+			String[] input = tfSeleciona.getText().split(" ", 2);
+			System.out.println(input);
+			String pk = "-1";
+			if (input.length == 2)
+				pk = input[1];
+			String tabela = input[0];
 			switch (tabela) {
-			case "pessoa":
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPessoa());
-				break;
 			case "carro":
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectCarro());
+				ta.setText(tabela + "\n" + Seleciona.selectCarro(pk));
 				break;
 			case "possui":
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPossui());
+				ta.setText(tabela + "\n" + Seleciona.selectPossui(pk));
 				break;
 			case "telefone":
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectTelefone());
+				ta.setText(tabela + "\n" + Seleciona.selectTelefone(pk));
 				break;
 			case "temAmizade":
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectTemAmizade());
+				ta.setText(tabela + "\n" + Seleciona.selectTemAmizade(pk));
 				break;
 			default:
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPessoa());
+				ta.setText(tabela + "\n" + Seleciona.selectPessoa(pk));
 			}
 		}
 		if (e.getSource() == sendInsere) {
+			String pk = "-1";
 			String input = tfInsere.getText();
 			String tabela = InsereHelper.parseTabela(input);
 			System.out.printf("input = %s\n tabela=%s\n\n", input, tabela);
@@ -106,7 +109,7 @@ class ActionEventDemo implements ActionListener {
 				break;
 			default:
 				System.out.printf(tfInsere.getText() + "\n");
-				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPessoa());
+				ta.setText(tfSeleciona.getText() + "\n" + Seleciona.selectPessoa(pk));
 
 			}
 		}
