@@ -1,5 +1,6 @@
 # Projeto e Implementação de Banco de Dados
-Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados (ENPE/2020)
+
+Repositório para atividades da disciplina Projeto e Implementação de Banco de Dados, do Departamento de Computação da UFSCar.
 
 ## Trabalho 2 - Grupo 04
 * Daniel Farah (417513)
