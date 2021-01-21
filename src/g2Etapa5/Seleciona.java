@@ -2,16 +2,16 @@ package g2Etapa5;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.sql.Date;
 
 public class Seleciona {
 	static Connection con = null;
-	static Statement stm = null;
+	static PreparedStatement stm = null;
 	static ResultSet rs = null;
 	static ResultSetMetaData md = null;
 	static String sel = "";
@@ -26,14 +26,20 @@ public class Seleciona {
 											  Credentials.getSenha());
 
 			// Criar o comando
-			stm = con.createStatement();
 			if (pk.equals("-1"))
-				rs = stm.executeQuery("select * from pessoa");
+			{
+				stm = con.prepareStatement("select * from pessoa");
+			}
 			else
-				rs = stm.executeQuery("select * from pessoa where codigo = " + pk);
+			{
+				stm = con.prepareStatement("select * from pessoa where codigo = ?");
+				stm.setInt(1, Integer.parseInt(pk));
+			}
+			
+			rs = stm.executeQuery();
 
 			// Criar o metadado da tabela
-			md = rs.getMetaData();
+			md = stm.getMetaData();
 			int nroColunas = md.getColumnCount();
 			
 			// Exibir os metadados/dados
@@ -117,11 +123,17 @@ public class Seleciona {
 					  Credentials.getSenha());
 
 			// Criar o comando
-			stm = con.createStatement();
 			if (pk.equals("-1"))
-				rs = stm.executeQuery("select * from carro");
+			{
+				stm = con.prepareStatement("select * from carro");
+			}
 			else
-				rs = stm.executeQuery("select * from carro where placa = " + pk);
+			{
+				stm = con.prepareStatement("select * from carro where placa = ?");
+				stm.setString(1, pk);
+			}
+			
+			rs = stm.executeQuery();
 
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
@@ -189,14 +201,17 @@ public class Seleciona {
 					  Credentials.getSenha());
 
 			// Criar o comando
-			stm = con.createStatement();
 			if (pk.equals("-1"))
-				rs = stm.executeQuery("select * from possui");
-			else {
-				String pk1 = pk.split(", ")[0];
-				String pk2 = pk.split(", ")[1];
-				rs = stm.executeQuery("select * from possui where codigo = " + pk1 + "and placa = " + pk2);
+			{
+				stm = con.prepareStatement("select * from possui");
 			}
+			else
+			{
+				stm = con.prepareStatement("select * from possui where codigo = ?");
+				stm.setInt(1, Integer.parseInt(pk));
+			}
+			
+			rs = stm.executeQuery();
 
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
@@ -256,11 +271,17 @@ public class Seleciona {
 					  Credentials.getSenha());
 
 			// Criar o comando
-			stm = con.createStatement();
 			if (pk.equals("-1"))
-				rs = stm.executeQuery("select * from telefone");
+			{
+				stm = con.prepareStatement("select * from telefone");
+			}
 			else
-				rs = stm.executeQuery("select * from telefone where codigo = " + pk);
+			{
+				stm = con.prepareStatement("select * from telefone where codigo = ?");
+				stm.setInt(1, Integer.parseInt(pk));
+			}
+			
+			rs = stm.executeQuery();
 
 			// Criar o metadado da tabela
 			md = rs.getMetaData();
@@ -328,14 +349,18 @@ public class Seleciona {
 					  Credentials.getSenha());
 
 			// Criar o comando
-			stm = con.createStatement();
 			if (pk.equals("-1"))
-				rs = stm.executeQuery("select * from temAmizade");
-			else {
-				String pk1 = pk.split(", ")[0];
-				String pk2 = pk.split(", ")[1];
-				rs = stm.executeQuery("select * from temAmizade where codigo_pessoa = " + pk1 + "and codigo_amiga = " + pk2);
+			{
+				stm = con.prepareStatement("select * from temAmizade");
 			}
+			else
+			{
+				stm = con.prepareStatement("select * from temAmizade where codigo_pessoa = ?");
+				stm.setInt(1, Integer.parseInt(pk));
+			}
+			
+			rs = stm.executeQuery();
+
 
 			// Criar o metadado da tabela
 			md = rs.getMetaData();

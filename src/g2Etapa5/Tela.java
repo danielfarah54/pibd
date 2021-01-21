@@ -64,10 +64,10 @@ class ActionEventDemo implements ActionListener {
 
 		if (e.getSource() == sendSeleciona) {
 			String[] input = tfSeleciona.getText().split(" ", 2);
-			System.out.println(input);
 			String pk = "-1";
 			if (input.length == 2)
 				pk = input[1];
+			System.out.printf("pk(%s)\n", pk);
 			String tabela = input[0];
 			switch (tabela) {
 			case "carro":
